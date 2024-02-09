@@ -1,7 +1,42 @@
-import { ConnectWallet } from "@thirdweb-dev/react";
 import "./styles/Home.css";
+import { useState } from "react";
 
 export default function Home() {
+  const [file, setFile] = useState(null);
+  const [ipfsUrl, setIpfsUrl] = useState(null);
+
+  const handleFileChange = (event) => {
+    const uploadedFile = event.target.files[0];
+    setFile(uploadedFile);
+  };
+
+  const handleUpload = async () => {
+    if (!file) {
+      alert("Please select a file!");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      const response = await fetch("http://localhost:3000/upload", { // Update the URL to match your backend URL
+        method: "POST",
+        body: formData,
+        headers: {
+          "Accept": "application/json",
+        },
+      }); 
+      const data = await response.json();
+      setIpfsUrl(data.ipfsUrl);
+      console.log("File uploaded to IPFS:", data.ipfsUrl);
+      alert("File uploaded to IPFS!");
+    } catch (error) {
+      console.error("Error uploading file to IPFS:", error);
+      alert("Error uploading file to IPFS. Please try again later.");
+    }
+  };
+
   return (
     <main className="main">
       <div className="container">
@@ -9,84 +44,19 @@ export default function Home() {
           <h1 className="title">
             Welcome to{" "}
             <span className="gradient-text-0">
-              <a
-                href="https://thirdweb.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                thirdweb.
+              <a href="#" target="_blank" rel="noopener noreferrer">
+                _creatoz.
               </a>
             </span>
           </h1>
-
-          <p className="description">
-            Get started by configuring your desired network in{" "}
-            <code className="code">src/index.js</code>, then modify the{" "}
-            <code className="code">src/App.js</code> file!
-          </p>
-
-          <div className="connect">
-            <ConnectWallet />
-          </div>
         </div>
 
         <div className="grid">
-          <a
-            href="https://portal.thirdweb.com/"
-            className="card"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img
-              src="/images/portal-preview.png"
-              alt="Placeholder preview of starter"
-            />
-            <div className="card-text">
-              <h2 className="gradient-text-1">Portal ➜</h2>
-              <p>
-                Guides, references, and resources that will help you build with
-                thirdweb.
-              </p>
-            </div>
-          </a>
-
-          <a
-            href="https://thirdweb.com/dashboard"
-            className="card"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img
-              src="/images/dashboard-preview.png"
-              alt="Placeholder preview of starter"
-            />
-            <div className="card-text">
-              <h2 className="gradient-text-2">Dashboard ➜</h2>
-              <p>
-                Deploy, configure, and manage your smart contracts from the
-                dashboard.
-              </p>
-            </div>
-          </a>
-
-          <a
-            href="https://thirdweb.com/templates"
-            className="card"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img
-              src="/images/templates-preview.png"
-              alt="Placeholder preview of templates"
-            />
-            <div className="card-text">
-              <h2 className="gradient-text-3">Templates ➜</h2>
-              <p>
-                Discover and clone template projects showcasing thirdweb
-                features.
-              </p>
-            </div>
-          </a>
+          <div>
+            <input type="file" onChange={handleFileChange} />
+            <button onClick={handleUpload}>upload</button>
+            <p>{ipfsUrl}</p>
+          </div>
         </div>
       </div>
     </main>
