@@ -27,7 +27,7 @@ const myMiddleware = (req, res, next) => {
 const upload = multer({ dest: "uploads/" }); // Set the destination folder where files will be stored temporarily
 
 // POST endpoint for uploading files to IPFS
-app.post("/upload", upload.single('file'), async (req, res) => {
+app.post("/upload", upload.single("file"), async (req, res) => {
   try {
     if (!req.file) {
       return res.status(400).json({ error: "No file uploaded" });
@@ -35,7 +35,7 @@ app.post("/upload", upload.single('file'), async (req, res) => {
 
     // Access uploaded file details using req.file
     const file = req.file;
-    console.log(file)
+    // console.log(file)
 
     // Read the contents of the uploaded file
     const fileContent = fs.readFileSync(file.path);
@@ -56,8 +56,6 @@ app.post("/upload", upload.single('file'), async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
-
-
 
 app.get("/", myMiddleware, (req, res, next) =>
   res.send("ipfs Server is Running")
