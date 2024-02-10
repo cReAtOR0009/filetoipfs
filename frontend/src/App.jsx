@@ -1,9 +1,10 @@
 import "./styles/Home.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "react-toastify"; // Import toast directly
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDropzone } from "react-dropzone";
+// import { useEffect } from "react/cjs/react.production.min";
 
 export default function Home() {
   const [ipfsUrl, setIpfsUrl] = useState("");
@@ -12,9 +13,8 @@ export default function Home() {
 
   const onDrop = async (acceptedFiles) => {
     const file = acceptedFiles[0];
+    setLoading(true);
     try {
-      setLoading(true);
-
       // Create a new XMLHttpRequest object
       const xhr = new XMLHttpRequest();
 
@@ -40,16 +40,20 @@ export default function Home() {
       xhr.onload = function () {
         if (xhr.status === 200) {
           const data = JSON.parse(xhr.responseText);
-          console.log("data: ", data)
+          console.log("data: ", data);
           JSON.parse(xhr.responseText);
           toast.success("File uploaded to IPFS!", {
             autoClose: 3000,
           });
-          setIpfsUrl(data.ipfsUrl)
+          setIpfsUrl(data.ipfsUrl);
+          setLoading(false); // Set loading state to false when uploading completes
+          setProgress(0); // Reset progress state
         } else {
           toast.error("Failed to upload File to IPFS!", {
             autoClose: 3000,
           });
+          setLoading(false); // Set loading state to false when uploading completes
+          setProgress(0); 
         }
       };
     } catch (error) {
@@ -57,13 +61,14 @@ export default function Home() {
       toast.error("Error uploading file to IPFS. Please try again later.", {
         autoClose: 3000,
       });
-    } finally {
-      setLoading(false); // Set loading state to false when uploading completes
-      setProgress(0); // Reset progress state
-    }
+    } 
   };
 
   const { getRootProps, getInputProps, open } = useDropzone({ onDrop });
+
+  // useEffect(() => {
+  //   setIpfsUrl(ipfsUrl);
+  // }, [ipfsUrl]);
 
   return (
     <main className="main">
@@ -87,7 +92,7 @@ export default function Home() {
               <p>Drag 'n' drop a file here, or click to select a file</p>
             </div>
             {/* Show loading animation if loading state is true */}
-            {loading && <div className="loading">Uploading...</div>}
+            {loading && <div className="loading"></div>}
             {/* <button onClick={open}>Upload</button> */}
             {/* Show progress bar if progress state is greater than 0 */}
             {progress > 0 && (
