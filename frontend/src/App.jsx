@@ -40,11 +40,12 @@ export default function Home() {
       xhr.onload = function () {
         if (xhr.status === 200) {
           const data = JSON.parse(xhr.responseText);
-          // console.log("data: ", data)
+          console.log("data: ", data)
           JSON.parse(xhr.responseText);
           toast.success("File uploaded to IPFS!", {
             autoClose: 3000,
           });
+          setIpfsUrl(data.ipfsUrl)
         } else {
           toast.error("Failed to upload File to IPFS!", {
             autoClose: 3000,
