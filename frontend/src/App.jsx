@@ -66,9 +66,9 @@ export default function Home() {
 
   const { getRootProps, getInputProps, open } = useDropzone({ onDrop });
 
-  useEffect(() => {
-    setIpfsUrl(ipfsUrl);
-  }, [ipfsUrl]);
+  // useEffect(() => {
+  //   setIpfsUrl(ipfsUrl);
+  // }, [ipfsUrl]);
 
   return (
     <main className="main">
