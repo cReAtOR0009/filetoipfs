@@ -28,7 +28,7 @@ export default function Home() {
         }
       });
 
-      xhr.open("POST", "http://localhost:3000/upload");
+      xhr.open("POST", "https://creatoz-ipfs.onrender.com/upload"); 
 
       // Create FormData and append the file
       const formData = new FormData();
@@ -37,11 +37,12 @@ export default function Home() {
       // Send the request with FormData
       xhr.send(formData);
 
-      xhr.onload = function () {
+      xhr.onload = function () { 
         if (xhr.status === 200) {
           const data = JSON.parse(xhr.responseText);
-          setIpfsUrl(data.ipfsUrl);
-          toast.success("File uploaded to IPFS!", {
+          // console.log("data: ", data)
+SON.parse(xhr.responseText);
+   toast.success("File uploaded to IPFS!", {
             autoClose: 3000,
           });
         } else {
