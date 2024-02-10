@@ -53,7 +53,7 @@ export default function Home() {
             autoClose: 3000,
           });
           setLoading(false); // Set loading state to false when uploading completes
-          setProgress(0); 
+          setProgress(0);
         }
       };
     } catch (error) {
@@ -61,7 +61,7 @@ export default function Home() {
       toast.error("Error uploading file to IPFS. Please try again later.", {
         autoClose: 3000,
       });
-    } 
+    }
   };
 
   const { getRootProps, getInputProps, open } = useDropzone({ onDrop });
@@ -76,10 +76,10 @@ export default function Home() {
       <div className="container">
         <div className="header">
           <h1 className="title gradient-text-0">
-            Upload Files to IPFS{" "}
+            Upload Files to IPFS with{" "}
             <span className="gradient-text-0">
               <a href="#" target="_blank" rel="noopener noreferrer">
-                _creatoz.
+              _CREATOR.
               </a>
             </span>
           </h1>
