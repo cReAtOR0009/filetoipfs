@@ -61,7 +61,9 @@ export default function Home() {
       toast.error("Error uploading file to IPFS. Please try again later.", {
         autoClose: 3000,
       });
-    } 
+    } finally {
+      
+    }
   };
 
   const { getRootProps, getInputProps, open } = useDropzone({ onDrop });
