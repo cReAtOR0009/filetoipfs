@@ -155,14 +155,24 @@ i {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
-  font-weight: bold;
   margin-top: 10px;
   border-radius: 50%;
-  border: 1px;
-  height: 50px;
+  border: 5px solid rgb(70, 2, 61);
+  border-bottom: 10px dotted rgb(255, 255, 255);
+  border-top: 10px dotted #fff;
+  height: 100px;
+  width: 100px;
+  animation: spin 2s linear infinite;
+  /* background-color: red; */
 }
-
+@keyframes spin {
+  from {
+    transform: rotate(0deg); /* Starting rotation angle */
+  }
+  to {
+    transform: rotate(360deg); /* Ending rotation angle */
+  }
+}
 .progressBarContainer {
   /* Styles for progress bar container */
   width: 100%;
