@@ -1,6 +1,6 @@
 # Project Title
 
-Uploading Files to IPFS With \_CREATOR
+Uploading Files to IPFS With CREATOR
 
 ## Table of Contents
 
@@ -19,7 +19,7 @@ Uploading Files to IPFS With \_CREATOR
 
 ## Introduction
 
-This project demonstrates how to upload files to IPFS (InterPlanetary File System) and obtain the public link to the pinned file. The project utilizes Express.js for the backend server, Multer for handling file uploads, and ThirdwebStorage for interacting with IPFS.
+This project demonstrates how to upload files to IPFS (InterPlanetary File System) and obtain the public link to the pinned file. The project utilizes Express.js for the backend server, Multer for handling file uploads, and ThirdwebStorage for interacting with IPFS, it also uses vite for frontend, xhr for sending request to server and packages like react-toastify, react-dropzone were also used.
 
 ## Getting Started
 

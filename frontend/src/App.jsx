@@ -79,7 +79,7 @@ export default function Home() {
             Upload Files to IPFS with{" "}
             <span className="gradient-text-0">
               <a href="#" target="_blank" rel="noopener noreferrer">
-              _CREATOR.
+                _CREATOR.
               </a>
             </span>
           </h1>
@@ -92,7 +92,20 @@ export default function Home() {
               <p>Drag 'n' drop a file here, or click to select a file</p>
             </div>
             {/* Show loading animation if loading state is true */}
-            {loading && <div className="loading"></div>}
+            {loading && (
+              <div class="spinner">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+            )}
             {/* <button onClick={open}>Upload</button> */}
             {/* Show progress bar if progress state is greater than 0 */}
             {progress > 0 && (
